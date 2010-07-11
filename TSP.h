@@ -88,6 +88,8 @@ long int geo_distance (long int i, long int j);
 
 long int att_distance (long int i, long int j);
 
+long int toroid_distance (long int i, long int j);
+
 long int compute_tour_length( long int *t );
 
 long int **compute_distances(void);

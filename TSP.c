@@ -63,7 +63,9 @@
 #include "ls.h"
 #include "utilities.h"
 
+#ifndef M_PI
 #define M_PI 3.14159265358979323846264
+#endif
 
 long int n;          /* number of cities in the instance to be solved */
 
@@ -76,6 +78,14 @@ static double dtrunc (double x)
     k = (int) x;
     x = (double) k;
     return x;
+}
+
+double dmin (double i, double j)
+{
+  if (i < j)
+    return i;
+  else
+    return j;
 }
 
 long int  (*distance)(long int, long int);  /* function pointer */
@@ -180,7 +190,28 @@ long int att_distance (long int i, long int j)
     return dij;
 }
 
+long int toroid_distance (long int i, long int j)
+/*
+	FUNCTION: compute toroid distance between two nodes rounded to next
+	          integer for TSPLIB instances.
+	INPUT:    two node indices
+        OUTPUT:   distance between the two nodes
+        COMMENTS: created for the board challenge for electrica
+*/
+{
+  double temp1 = abs(instance.nodeptr[i].x - instance.nodeptr[j].x);
+  double temp2 = abs(instance.nodeptr[i].y - instance.nodeptr[j].y);
 
+  double xd = dmin(temp1, (1000 - temp1));
+  double yd = dmin(temp2, (1000 - temp2));
+
+  double r  = sqrt(xd*xd + yd*yd) + 0.5;
+
+
+  /* printf("d: %f\n", r); */
+
+  return (long int) r;
+}
 
 long int ** compute_distances(void)
 /*    

@@ -218,6 +218,9 @@ struct point * read_etsp(const char *tsp_file_name)
 	    else if ( strcmp("ATT", buf) == 0 ) {
 		distance = att_distance;
 	    }
+	    else if ( strcmp("EUC_TOROID", buf) == 0 ) {
+	        distance = toroid_distance;
+	   }
 	    else
 		fprintf(stderr,"EDGE_WEIGHT_TYPE %s not implemented\n",buf);
 	    strcpy(instance.edge_weight_type, buf);
@@ -225,7 +228,7 @@ struct point * read_etsp(const char *tsp_file_name)
 	}
 	else if( strcmp("EDGE_WEIGHT_TYPE:", buf) == 0 ){
 	    /* set pointer to appropriate distance function; has to be one of 
-	       EUC_2D, CEIL_2D, GEO, or ATT. Everything else fails */
+	       EUC_2D, CEIL_2D, GEO, ATT or EUC_TOROID. Everything else fails */
 	    buf[0]=0;
 	    fscanf(tsp_file, "%s", buf);
 	    TRACE ( printf("%s\n", buf); )
@@ -243,6 +246,9 @@ struct point * read_etsp(const char *tsp_file_name)
 	    else if ( strcmp("ATT", buf) == 0 ) {
 		distance = att_distance;
 	    }
+	    else if ( strcmp("EUC_TOROID", buf) == 0 ) {
+	        distance = toroid_distance;
+	   }
 	    else {
 		fprintf(stderr,"EDGE_WEIGHT_TYPE %s not implemented\n",buf);
 		exit(1);

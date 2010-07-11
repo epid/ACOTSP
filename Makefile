@@ -25,3 +25,5 @@ parse.o: parse.c parse.h
 
 timer.o: timer.c timer.h
 	gcc -c timer.c -o timer.o  -O -Wall -ansi -pedantic
+clean:
+	rm -f *.o acotsp
