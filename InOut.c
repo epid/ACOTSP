@@ -488,7 +488,7 @@ void exit_try( long int ntry )
 
   fprintf(comp_report,"end try %ld\n\n",ntry);
   fprintf(stat_report,"end try %ld\n\n",ntry);
-  TRACE (output_solution();)
+  output_solution();
   fflush(report); 
   fflush(comp_report); 
   fflush(stat_report); 
